@@ -1,5 +1,3 @@
-import org.springframework.boot.gradle.tasks.bundling.BootJar
-
 plugins {
     id("org.springframework.boot") version "2.7.9"
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
@@ -11,14 +9,11 @@ repositories {
     mavenCentral()
 }
 
-tasks.withType<BootJar> {
-    enabled = false
-}
-
 dependencies {
+    implementation(project(":app"))
     implementation(project(":domain"))
     implementation(project(":infra"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
