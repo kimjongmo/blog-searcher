@@ -9,5 +9,4 @@ class BlogSearcherApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }
