@@ -2,4 +2,4 @@ rootProject.name = "blog-searcher"
 
 include("app")
 include("domain")
-include("infra")
+include("infra:persistence", "infra:client")
