@@ -23,6 +23,7 @@ subprojects {
 
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
     }
 
     tasks.withType<KotlinCompile> {
