@@ -17,7 +17,6 @@ tasks.withType<BootJar> {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":infra"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.springframework.boot:spring-boot-starter")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

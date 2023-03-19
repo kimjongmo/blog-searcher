@@ -1,2 +1,12 @@
 server:
   port: 8888
+
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+search-api:
+  kakao:
+    host: https://dapi.kakao.com
+    headers:
+      Authorization: "KakaoAK a3c6629e2baa33f938cd0c1eebeceec1"
