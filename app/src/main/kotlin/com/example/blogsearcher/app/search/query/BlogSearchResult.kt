@@ -9,7 +9,9 @@ class BlogSearchResult(
 
 class BlogSearchPage(
     val total: Int,
-    val currentPage: Int
+    val pageNo: Int,
+    val sizePerPage: Int,
+    val resultCnt: Int
 )
 
 class BlogSearchItem(

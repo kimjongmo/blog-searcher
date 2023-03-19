@@ -1,6 +1,9 @@
 server:
   port: 8888
 
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 
 search-api:
   kakao:
