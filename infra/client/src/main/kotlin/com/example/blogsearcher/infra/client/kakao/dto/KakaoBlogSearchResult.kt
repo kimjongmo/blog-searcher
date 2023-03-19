@@ -14,8 +14,10 @@ class Meta(
 )
 
 class Document(
-    val contents: String,
-    val datetime: LocalDateTime,
     val title: String,
-    val url: String
+    val contents: String,
+    val url: String,
+    val blogname: String,
+    val thumbnail: String,
+    val datetime: LocalDateTime
 )

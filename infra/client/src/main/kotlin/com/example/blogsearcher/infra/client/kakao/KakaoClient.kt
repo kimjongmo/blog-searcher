@@ -7,7 +7,7 @@ import retrofit2.http.QueryMap
 
 interface KakaoClient {
 
-    @GET("/v2/search/web")
+    @GET("/v2/search/blog")
     fun searchBlog(
         @QueryMap params: Map<String, String>
     ): Call<KakaoBlogSearchResult>

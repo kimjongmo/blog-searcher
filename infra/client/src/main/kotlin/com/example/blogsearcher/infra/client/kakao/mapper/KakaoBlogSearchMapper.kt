@@ -27,6 +27,7 @@ object KakaoBlogSearchMapper {
             BlogSearchItem(
                 title = it.title,
                 content = it.contents,
+                blogname = it.blogname,
                 postdate = it.datetime.toLocalDate(),
                 url = it.url
             )

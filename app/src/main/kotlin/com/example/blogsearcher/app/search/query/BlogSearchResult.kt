@@ -17,6 +17,7 @@ class BlogSearchPage(
 class BlogSearchItem(
     val title: String,
     val content: String,
+    val blogname: String,
     val postdate: LocalDate,
     val url: String
 )
