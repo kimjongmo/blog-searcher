@@ -1,8 +1,7 @@
 package com.example.blogsearcher.presentation.api.blog
 
-import com.example.blogsearcher.app.search.query.BlogSearchResult
 import com.example.blogsearcher.app.search.query.BlogSearchService
-import com.example.blogsearcher.app.search.query.BlogSearchSpec
+import com.example.blogsearcher.domain.search.BlogSearchResult
 import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.domain.search.vo.Page
 import com.example.blogsearcher.domain.search.vo.Sorting
@@ -33,7 +32,9 @@ class BlogApiController(
 
     @GetMapping("/search")
     fun searchBlog(@Valid requestDto: BlogSearchRequestDto): BlogSearchResult? {
-        return blogSearchService.search(requestDto.toSpec())
+        val keyword = Keyword(requestDto.keyword)
+        val page = Page(requestDto.page, requestDto.size, Sorting.from(requestDto.sort)!!)
+        return blogSearchService.search(keyword, page)
     }
 }
 
@@ -51,9 +52,4 @@ class BlogSearchRequestDto(
 
     @field:ValueOfEnum(Sorting::class)
     val sort: String
-) {
-    fun toSpec() = BlogSearchSpec(
-        keyword = Keyword(keyword),
-        page = Page(page, size, Sorting.from(sort)!!)
-    )
-}
+)
