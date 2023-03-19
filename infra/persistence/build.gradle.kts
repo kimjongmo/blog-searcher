@@ -1,5 +1,3 @@
-import org.springframework.boot.gradle.tasks.bundling.BootJar
-
 plugins {
     id("org.springframework.boot") version "2.7.9"
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
@@ -9,10 +7,6 @@ plugins {
 
 repositories {
     mavenCentral()
-}
-
-tasks.withType<BootJar> {
-    enabled = false
 }
 
 dependencies {
