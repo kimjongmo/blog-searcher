@@ -10,8 +10,8 @@ class BindingErrorResponse private constructor(message: String, val field: Map<S
             val fieldErrors = bindException.bindingResult.fieldErrors
 
             return BindingErrorResponse(
-                "요청을 확인해주세요.",
-                fieldErrors.associate { it.field to (it.defaultMessage ?: "값을 확인해주세요") }
+                message = "요청을 확인해주세요.",
+                field = fieldErrors.associate { it.field to (it.defaultMessage ?: "값을 확인해주세요") }
             )
         }
     }
