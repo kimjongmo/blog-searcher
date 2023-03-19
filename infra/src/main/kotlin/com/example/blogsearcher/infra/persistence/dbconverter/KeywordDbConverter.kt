@@ -5,7 +5,7 @@ import javax.persistence.AttributeConverter
 
 class KeywordDbConverter : AttributeConverter<Keyword, String> {
     override fun convertToDatabaseColumn(attribute: Keyword?): String? {
-        return attribute?.toString()
+        return attribute?.value
     }
 
     override fun convertToEntityAttribute(dbData: String?): Keyword? {

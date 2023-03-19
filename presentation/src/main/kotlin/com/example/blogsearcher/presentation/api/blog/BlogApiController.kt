@@ -1,6 +1,6 @@
 package com.example.blogsearcher.presentation.api.blog
 
-import com.example.blogsearcher.app.search.query.BlogSearchService
+import com.example.blogsearcher.app.search.BlogSearchService
 import com.example.blogsearcher.domain.search.BlogSearchResult
 import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.domain.search.vo.Page
