@@ -50,12 +50,12 @@ class BlogSearchRequestDto(
     @field:NotBlank(message = "검색어를 입력해주세요")
     val keyword: String,
 
-    @field:Min(1)
-    @field:Max(50)
+    @field:Min(value = 1, message = "페이지는 1 ~ 50 사이의 값이어야 합니다")
+    @field:Max(value = 50, message = "페이지는 1 ~ 50 사이의 값이어야 합니다")
     val page: Int = 1,
 
-    @field:Min(1)
-    @field:Max(50)
+    @field:Min(value = 1, message = "최소 1이상 설정 가능합니다.")
+    @field:Max(value = 50, message = "최대 50까지만 설정 가능합니다.")
     val size: Int = 10,
 
     @field:ValueOfEnum(Sorting::class)
