@@ -31,6 +31,11 @@ search-api:
     host: https://dapi.kakao.com
     headers:
       Authorization: "KakaoAK a3c6629e2baa33f938cd0c1eebeceec1"
+  naver:
+    host: https://openapi.naver.com
+    headers:
+      X-Naver-Client-Id: Tx5Lge0YJLHJTBtcQesQ
+      X-Naver-Client-Secret: SHTtfYBea8
 
 logging:
   pattern:

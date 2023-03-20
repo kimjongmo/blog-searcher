@@ -28,7 +28,11 @@ search-api:
     host: http://test.com
     headers:
       Authorization: "test auth"
-
+  naver:
+    host: http://test.com
+    headers:
+      X-Naver-Client-Id: abc
+      X-Naver-Client-Secret: def
 logging:
   level:
     org.springframework.jdbc.datasource.init.ScriptUtils: debug
