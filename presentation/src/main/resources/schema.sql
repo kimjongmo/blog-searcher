@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS blog_search_record;
+
 CREATE TABLE blog_search_record
 (
     id        BIGINT AUTO_INCREMENT PRIMARY KEY,

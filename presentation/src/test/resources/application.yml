@@ -1,6 +1,3 @@
-server:
-  port: 8888
-
 spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
@@ -28,10 +25,10 @@ spring:
 
 search-api:
   kakao:
-    host: https://dapi.kakao.com
+    host: http://test.com
     headers:
-      Authorization: "KakaoAK a3c6629e2baa33f938cd0c1eebeceec1"
+      Authorization: "test auth"
 
 logging:
-  pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%-5level) %clr(${PID:- }){magenta}  %clr(---){faint} %clr([%thread]){green} %clr(%logger{35}){cyan} %clr(:){faint} %msg %n"
+  level:
+    org.springframework.jdbc.datasource.init.ScriptUtils: debug
