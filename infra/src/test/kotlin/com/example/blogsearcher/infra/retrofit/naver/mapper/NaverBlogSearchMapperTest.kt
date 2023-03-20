@@ -4,7 +4,7 @@ import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.domain.search.vo.Page
 import com.example.blogsearcher.domain.search.vo.Sorting
 import com.example.blogsearcher.infra.retrofit.naver.NaverConstants
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class NaverBlogSearchMapperTest {
