@@ -1,11 +1,13 @@
 package com.example.blogsearcher.presentation.api.blog
 
 import com.example.blogsearcher.app.search.BlogSearchService
+import com.example.blogsearcher.app.search.NotFoundSearchSourceException
 import com.example.blogsearcher.domain.search.BlogSearchResult
 import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.domain.search.vo.Page
 import com.example.blogsearcher.domain.search.vo.Sorting
 import com.example.blogsearcher.presentation.api.BindingErrorResponse
+import com.example.blogsearcher.presentation.api.ErrorResponse
 import com.example.blogsearcher.presentation.api.validation.ValueOfEnum
 import org.springframework.http.HttpStatus
 import org.springframework.validation.BindException
@@ -28,6 +30,12 @@ class BlogApiController(
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handle(bindException: BindException): BindingErrorResponse {
         return BindingErrorResponse.from(bindException)
+    }
+
+    @ExceptionHandler(NotFoundSearchSourceException::class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    fun handleNotFoundSource(exception: NotFoundSearchSourceException): ErrorResponse {
+        return ErrorResponse(message = "현재 검색을 이용하실 수 없습니다.")
     }
 
     @GetMapping("/search")
