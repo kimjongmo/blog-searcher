@@ -23,6 +23,7 @@ class NaverClientFactory(properties: RetrofitProperties) : SimpleRetrofitFactory
     override fun initObjectMapper(): ObjectMapper {
         val timeModule = JavaTimeModule().apply {
             addDeserializer(LocalDate::class.java, LocalDateDeserializer())
+            addSerializer(LocalDate::class.java, LocalDateSerializer())
         }
         return ObjectMapper().registerModules(timeModule, SimpleModule(), KotlinModule.Builder().build())
     }
