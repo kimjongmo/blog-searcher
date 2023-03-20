@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.6.21"
+    kotlin("plugin.jpa") version "1.6.21"
 }
 
 repositories {
@@ -16,5 +17,6 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
     testImplementation("com.squareup.retrofit2:retrofit-mock:2.9.0")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
-//    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.h2database:h2")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 }

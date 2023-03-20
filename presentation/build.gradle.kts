@@ -19,7 +19,6 @@ dependencies {
     implementation(project(":app"))
     implementation(project(":domain"))
     implementation(project(":infra"))
-//    implementation(project(":infra:persistence"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
 }

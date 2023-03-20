@@ -1,11 +1,13 @@
 package com.example.blogsearcher.presentation.api.blog
 
-import com.example.blogsearcher.app.search.query.BlogSearchService
+import com.example.blogsearcher.app.search.BlogSearchService
+import com.example.blogsearcher.app.search.NotFoundSearchSourceException
 import com.example.blogsearcher.domain.search.BlogSearchResult
 import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.domain.search.vo.Page
 import com.example.blogsearcher.domain.search.vo.Sorting
 import com.example.blogsearcher.presentation.api.BindingErrorResponse
+import com.example.blogsearcher.presentation.api.ErrorResponse
 import com.example.blogsearcher.presentation.api.validation.ValueOfEnum
 import org.springframework.http.HttpStatus
 import org.springframework.validation.BindException
@@ -30,6 +32,12 @@ class BlogApiController(
         return BindingErrorResponse.from(bindException)
     }
 
+    @ExceptionHandler(NotFoundSearchSourceException::class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    fun handleNotFoundSource(exception: NotFoundSearchSourceException): ErrorResponse {
+        return ErrorResponse(message = "현재 검색을 이용하실 수 없습니다.")
+    }
+
     @GetMapping("/search")
     fun searchBlog(@Valid requestDto: BlogSearchRequestDto): BlogSearchResult? {
         val keyword = Keyword(requestDto.keyword)
@@ -42,12 +50,12 @@ class BlogSearchRequestDto(
     @field:NotBlank(message = "검색어를 입력해주세요")
     val keyword: String,
 
-    @field:Min(1)
-    @field:Max(50)
+    @field:Min(value = 1, message = "페이지는 1 ~ 50 사이의 값이어야 합니다")
+    @field:Max(value = 50, message = "페이지는 1 ~ 50 사이의 값이어야 합니다")
     val page: Int = 1,
 
-    @field:Min(1)
-    @field:Max(50)
+    @field:Min(value = 1, message = "최소 1이상 설정 가능합니다.")
+    @field:Max(value = 50, message = "최대 50까지만 설정 가능합니다.")
     val size: Int = 10,
 
     @field:ValueOfEnum(Sorting::class)
