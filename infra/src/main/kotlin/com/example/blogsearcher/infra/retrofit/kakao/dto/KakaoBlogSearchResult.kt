@@ -1,7 +1,9 @@
 package com.example.blogsearcher.infra.retrofit.kakao.dto
 
 import java.time.LocalDateTime
-
+/**
+ * [문서 참조](https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide#search-blog)
+ * */
 class KakaoBlogSearchResult(
     val meta: Meta,
     val documents: List<Document>

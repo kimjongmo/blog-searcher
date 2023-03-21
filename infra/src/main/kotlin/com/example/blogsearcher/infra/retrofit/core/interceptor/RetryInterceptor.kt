@@ -7,6 +7,9 @@ import okio.IOException
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * OkHttp 요청에서 예외가 발생했을 때 재시도를 하기 위한 인터셉터
+ * */
 class RetryInterceptor(private val maxRetries: Int = 3) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()

@@ -1,7 +1,9 @@
 package com.example.blogsearcher.infra.retrofit.naver.dto
 
 import java.time.LocalDate
-
+/**
+ * [문서 참조](https://developers.naver.com/docs/serviceapi/search/blog/blog.md#%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0)
+ * */
 class NaverBlogSearchResult(
     val lastBuildDate: String,
     val total: Int,

@@ -16,7 +16,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
-    testImplementation("com.squareup.retrofit2:retrofit-mock:2.9.0")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
     implementation("com.h2database:h2")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

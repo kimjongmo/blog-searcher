@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * 캐치하지 못한 예외를 핸들링하도록 한다.
+ * */
 @RestControllerAdvice
 class GlobalAdvice {
     @ExceptionHandler(Exception::class)

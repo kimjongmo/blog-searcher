@@ -16,6 +16,13 @@ import java.time.LocalDateTime
 private val log = KotlinLogging.logger { }
 
 interface BlogSearchService {
+    /**
+     * 블로그 검색
+     * @param keyword 검색 키워드
+     * @param page 검색 페이지 정보
+     * @return 검색 결과
+     * @throws NotFoundSearchSourceException 검색 소스를 가져오지 못한 경우 발생
+     * */
     fun search(keyword: Keyword, page: Page): BlogSearchResult?
 }
 
@@ -29,17 +36,16 @@ class BlogSearchServiceImpl(
     private lateinit var searchSourceList: List<SearchSourceAdapter>
 
     init {
+        /**
+         * 클래스 초기화시 블로그 검색 소스를 모두 가져온다
+         * 검색 소스마다 서킷브레이커를 생성하고 이것을 이용해서 검색할 수 있도록 adapter 클래스에 담아 저장해놓는다
+         * */
         searchSourceList = blogSearchSourceRepository.findAll().map { searchSource ->
             val circuitBreaker = circuitBreakerRegister.register(searchSource.searchVendor.name)
             SearchSourceAdapter(searchSource = searchSource, circuitBreaker = circuitBreaker)
         }
     }
 
-    /**
-     * @param keyword 검색 키워드
-     * @param page 검색 페이지 정보
-     * @throws NotFoundSearchSourceException 검색 소스를 가져오지 못한 경우 발생
-     * */
     override fun search(keyword: Keyword, page: Page): BlogSearchResult? {
         val searchSource = getAvailableSource() ?: throw NotFoundSearchSourceException()
 
@@ -76,6 +82,9 @@ class BlogSearchServiceImpl(
         return searchSourceList.find { it.available }
     }
 
+    /**
+     * [currVendor]가 아니면서 이용 가능한 검색 소스 리턴.
+     * */
     private fun nextAvailableSource(currVendor: BlogSearchVendor): BlogSearchSource? {
         return searchSourceList.find { it.available && it.searchVendor != currVendor }
     }

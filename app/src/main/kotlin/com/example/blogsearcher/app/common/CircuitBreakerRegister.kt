@@ -15,6 +15,10 @@ class CircuitBreakerRegister(
 ) {
 
     // TODO: 세부 세팅까지 열어주면 좋을듯
+    /**
+     * @param name circuit breaker 이름 지정.
+     * @return 생성된 circuit breaker
+     * */
     fun register(name: String): CircuitBreaker {
         val config = CircuitBreakerConfig.custom()
             .slidingWindow(10, 10, CircuitBreakerConfig.SlidingWindowType.COUNT_BASED)
@@ -29,6 +33,9 @@ class CircuitBreakerRegister(
         }
     }
 
+    /**
+     * 서킷브레이커의 상태 전환시 로그를 남긴다
+     * */
     private fun loggingStateTransition(circuitBreaker: CircuitBreaker) {
         circuitBreaker.eventPublisher.onStateTransition { event ->
             val message =

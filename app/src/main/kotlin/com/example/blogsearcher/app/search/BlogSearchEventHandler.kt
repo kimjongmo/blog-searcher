@@ -14,12 +14,20 @@ class BlogSearchEventHandler(
     private val blogSearchEventRepository: BlogSearchRecordRepository,
     private val cache: LoadingCache<String, Long>
 ) {
+    /**
+     * 검색 이벤트 발생시 데이터베이스에 저장.
+     * 검색 응답에 영향을 주지 않게하기 위해 비동기로 실행시키도록 한다
+     * */
     @Async(AsyncConfig.EVENT_POOL_NAME)
     @EventListener(BlogSearchEvent::class)
     fun handle(event: BlogSearchEvent) {
         blogSearchEventRepository.save(BlogSearchRecord(event.vendor, event.keyword, event.searchAt))
     }
 
+    /**
+     * 검색 이벤트 발생시 캐시에 저장.
+     * 검색 응답에 영향을 주지 않게하기 위해 비동기로 실행시키도록 한다
+     * */
     @Async(AsyncConfig.EVENT_POOL_NAME)
     @EventListener(BlogSearchEvent::class)
     fun saveOrIncrease(blogSearchEvent: BlogSearchEvent) {
