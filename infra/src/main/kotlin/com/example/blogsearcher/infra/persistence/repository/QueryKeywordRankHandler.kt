@@ -1,6 +1,6 @@
 package com.example.blogsearcher.infra.persistence.repository
 
-import com.example.blogsearcher.domain.rank.query.QueryBlogSearchKeywordRank
+import com.example.blogsearcher.app.rank.QueryKeywordRank
 import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.infra.persistence.entity.QBlogSearchRecordEntity.blogSearchRecordEntity
 import com.querydsl.core.annotations.QueryProjection
@@ -10,14 +10,14 @@ import java.time.LocalDateTime
 
 class BlogSearchRecordRankDto @QueryProjection constructor(
     val keyword: Keyword,
-    val count: Int
+    val count: Long
 )
 
 @Repository
-class QueryBlogSearchKeywordRankHandler(
+class QueryKeywordRankHandler(
     private val factory: JPAQueryFactory
-) : QueryBlogSearchKeywordRank {
-    override fun getRank(from: LocalDateTime, to: LocalDateTime): Map<String, Int> {
+) : QueryKeywordRank {
+    override fun getRank(from: LocalDateTime, to: LocalDateTime): Map<String, Long> {
         val result = this.factory.select(QBlogSearchRecordRankDto(blogSearchRecordEntity.keyword, blogSearchRecordEntity.count()))
             .from(blogSearchRecordEntity)
             .where(blogSearchRecordEntity.searchAt.between(from, to))

@@ -8,7 +8,8 @@ plugins {
 dependencies {
     implementation(project(":domain"))
     implementation("io.github.resilience4j:resilience4j-spring-boot2:1.7.1")
-    // compile "io.github.resilience4j:resilience4j-spring-boot3:${resilience4jVersion}"
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.5")
 }

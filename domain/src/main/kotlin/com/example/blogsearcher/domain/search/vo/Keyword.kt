@@ -5,8 +5,9 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.SerializerProvider
 import java.io.IOException
+import java.io.Serializable
 
-data class Keyword(val value: String)
+data class Keyword(val value: String) : Serializable
 
 class KeywordJsonSerializer : com.fasterxml.jackson.databind.JsonSerializer<Keyword>() {
     @Throws(IOException::class)
