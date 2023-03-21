@@ -1,5 +1,7 @@
 package com.example.blogsearcher.app.rank
 
+import com.example.blogsearcher.domain.rank.QueryKeywordRank
+import com.github.benmanes.caffeine.cache.LoadingCache
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -11,7 +13,7 @@ interface KeywordRankService {
 @Service
 class KeywordRankServiceImpl(
     private val queryKeywordRank: QueryKeywordRank,
-    private val keywordRankCalculator: KeywordRankCalculator
+    private val cache: LoadingCache<String, Long>
 ) : KeywordRankService {
 
     override fun getRankFromDB(from: LocalDateTime, to: LocalDateTime): Map<String, Long> {
@@ -19,6 +21,10 @@ class KeywordRankServiceImpl(
     }
 
     override fun getRankFromCache(rank: Int): Map<String, Long> {
-        return keywordRankCalculator.getTop(rank)
+        return cache.asMap()
+            .toList()
+            .sortedByDescending { it.second }
+            .take(rank)
+            .associate { it.first to it.second }
     }
 }

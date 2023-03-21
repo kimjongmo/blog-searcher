@@ -1,6 +1,6 @@
 package com.example.blogsearcher.infra.persistence.repository
 
-import com.example.blogsearcher.app.rank.QueryKeywordRank
+import com.example.blogsearcher.domain.rank.QueryKeywordRank
 import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.infra.persistence.entity.QBlogSearchRecordEntity.blogSearchRecordEntity
 import com.querydsl.core.annotations.QueryProjection

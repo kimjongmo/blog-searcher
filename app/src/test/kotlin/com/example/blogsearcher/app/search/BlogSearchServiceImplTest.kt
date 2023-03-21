@@ -42,14 +42,14 @@ internal class BlogSearchServiceImplTest {
         given(it.searchVendor).willReturn(BlogSearchVendor.NAVER)
     }
     private val kakaoCircuitBreaker: CircuitBreaker = mock { circuitBreaker ->
-        given(circuitBreaker.executeSupplier(any<Supplier<BlogSearchResult?>>())).will {
-            val arg = it.arguments.first() as Supplier<BlogSearchResult?>
+        given(circuitBreaker.executeSupplier(any<Supplier<*>>())).will {
+            val arg = it.arguments.first() as Supplier<*>
             return@will arg.get()
         }
     }
     private val naverCircuitBreaker: CircuitBreaker = mock { circuitBreaker ->
-        given(circuitBreaker.executeSupplier(any<Supplier<BlogSearchResult?>>())).will {
-            val arg = it.arguments.first() as Supplier<BlogSearchResult?>
+        given(circuitBreaker.executeSupplier(any<Supplier<*>>())).will {
+            val arg = it.arguments.first() as Supplier<*>
             return@will arg.get()
         }
     }

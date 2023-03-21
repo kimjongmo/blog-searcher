@@ -1,4 +1,4 @@
-package com.example.blogsearcher.app.rank
+package com.example.blogsearcher.domain.rank
 
 import java.time.LocalDateTime
 
