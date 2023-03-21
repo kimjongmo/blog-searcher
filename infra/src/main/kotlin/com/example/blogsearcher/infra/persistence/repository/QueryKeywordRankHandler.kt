@@ -1,7 +1,6 @@
 package com.example.blogsearcher.infra.persistence.repository
 
-import com.example.blogsearcher.domain.rank.BlogSearchKeywordRank
-import com.example.blogsearcher.domain.rank.query.QueryBlogSearchKeywordRank
+import com.example.blogsearcher.domain.rank.QueryKeywordRank
 import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.infra.persistence.entity.QBlogSearchRecordEntity.blogSearchRecordEntity
 import com.querydsl.core.annotations.QueryProjection
@@ -15,10 +14,10 @@ class BlogSearchRecordRankDto @QueryProjection constructor(
 )
 
 @Repository
-class QueryBlogSearchKeywordRankHandler(
+class QueryKeywordRankHandler(
     private val factory: JPAQueryFactory
-) : QueryBlogSearchKeywordRank {
-    override fun getRank(from: LocalDateTime, to: LocalDateTime): List<BlogSearchKeywordRank> {
+) : QueryKeywordRank {
+    override fun getRank(from: LocalDateTime, to: LocalDateTime): Map<String, Long> {
         val result = this.factory.select(QBlogSearchRecordRankDto(blogSearchRecordEntity.keyword, blogSearchRecordEntity.count()))
             .from(blogSearchRecordEntity)
             .where(blogSearchRecordEntity.searchAt.between(from, to))
@@ -26,10 +25,8 @@ class QueryBlogSearchKeywordRankHandler(
             .limit(10)
             .fetch()
 
-        result.sortByDescending { it.count }
-
-        return result.mapIndexed { index, dto ->
-            BlogSearchKeywordRank(index + 1, dto.keyword, dto.count)
-        }
+        return result
+            .sortedByDescending { it.count }
+            .associate { it.keyword.value to it.count }
     }
 }
