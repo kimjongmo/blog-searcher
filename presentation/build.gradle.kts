@@ -12,6 +12,7 @@ repositories {
 }
 
 tasks.withType<BootJar> {
+    archiveFileName.set("${rootProject.name}.jar")
     enabled = true
 }
 
