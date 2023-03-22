@@ -1,10 +1,17 @@
 package com.example.blogsearcher.presentation.api
 
+import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.validation.BindException
 
-open class ErrorResponse(val message: String)
+open class ErrorResponse(
+    @get:Schema(example = "오류 메시지", description = "오류 메시지")
+    val message: String
+)
 
-class BindingErrorResponse private constructor(message: String, val field: Map<String, String>) : ErrorResponse(message) {
+class BindingErrorResponse private constructor(
+    message: String,
+    val field: Map<String, String>
+) : ErrorResponse(message) {
     companion object {
         fun from(bindException: BindException): BindingErrorResponse {
             val fieldErrors = bindException.bindingResult.fieldErrors

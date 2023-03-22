@@ -2,13 +2,13 @@ package com.example.blogsearcher.presentation.api.blog
 
 import com.example.blogsearcher.app.search.BlogSearchService
 import com.example.blogsearcher.app.search.NotFoundSearchSourceException
-import com.example.blogsearcher.domain.search.BlogSearchResult
 import com.example.blogsearcher.domain.search.vo.Keyword
 import com.example.blogsearcher.domain.search.vo.Page
 import com.example.blogsearcher.domain.search.vo.Sorting
 import com.example.blogsearcher.presentation.api.BindingErrorResponse
 import com.example.blogsearcher.presentation.api.ErrorResponse
-import com.example.blogsearcher.presentation.api.validation.ValueOfEnum
+import com.example.blogsearcher.presentation.api.blog.dto.BlogSearchRequestDto
+import com.example.blogsearcher.presentation.api.blog.dto.BlogSearchResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.validation.BindException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -17,15 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
-import javax.validation.constraints.Max
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotBlank
 
 @RestController
 @RequestMapping("/api/v1/blog")
 class BlogApiController(
     private val blogSearchService: BlogSearchService
-) {
+) : BlogApi {
     @ExceptionHandler(BindException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handle(bindException: BindException): BindingErrorResponse {
@@ -39,25 +36,11 @@ class BlogApiController(
     }
 
     @GetMapping("/search")
-    fun searchBlog(@Valid requestDto: BlogSearchRequestDto): BlogSearchResult? {
+    override fun searchBlog(@Valid requestDto: BlogSearchRequestDto): BlogSearchResponseDto? {
         val keyword = Keyword(requestDto.keyword)
         val page = Page(requestDto.page, requestDto.size, Sorting.from(requestDto.sort)!!)
-        return blogSearchService.search(keyword, page)
+        val blogSearchResult = blogSearchService.search(keyword, page)
+
+        return blogSearchResult?.let { BlogSearchResponseDto(it) }
     }
 }
-
-class BlogSearchRequestDto(
-    @field:NotBlank(message = "검색어를 입력해주세요")
-    val keyword: String,
-
-    @field:Min(value = 1, message = "페이지는 1 ~ 50 사이의 값이어야 합니다")
-    @field:Max(value = 50, message = "페이지는 1 ~ 50 사이의 값이어야 합니다")
-    val page: Int = 1,
-
-    @field:Min(value = 1, message = "최소 1이상 설정 가능합니다.")
-    @field:Max(value = 50, message = "최대 50까지만 설정 가능합니다.")
-    val size: Int = 10,
-
-    @field:ValueOfEnum(Sorting::class)
-    val sort: String
-)

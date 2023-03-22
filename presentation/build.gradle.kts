@@ -22,4 +22,6 @@ dependencies {
     implementation(project(":infra"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.15")
+
 }
