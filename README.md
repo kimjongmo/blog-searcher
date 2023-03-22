@@ -1,3 +1,6 @@
+## 결과물
+`jar` 디렉토리안에 `blog-searcher.jar` 파일을 다운로드받으면 됩니다.
+
 ## API
 
 애플리케이션 실행 후 `http://localhost:8888/swagger-ui/index.html` 경로로 들어가면 API 스펙에 대하여 상세한 내용을 볼 수 있습니다.
